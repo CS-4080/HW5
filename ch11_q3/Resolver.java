@@ -399,13 +399,13 @@ class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
         }
 
 //< duplicate-variable
-        scope.put(name.lexeme, false);
+        scope.put(name.lexeme, new Local(name));
     }
     //< declare
 //> define
     private void define(Token name) {
         if (scopes.isEmpty()) return;
-        scopes.peek().put(name.lexeme, true);
+        scopes.peek.get(name.lexeme).defined = true;
     }
     //< define
 //> resolve-local
