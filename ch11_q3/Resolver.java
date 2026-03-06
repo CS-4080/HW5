@@ -224,7 +224,8 @@ class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
     @Override
     public Void visitAssignExpr(Expr.Assign expr) {
         resolve(expr.value);
-        resolveLocal(expr, expr.name);
+        // resolveLocal(expr, expr.name);
+        resolveLocalForAssign(expr, expr.name);
         return null;
     }
     //< visit-assign-expr
@@ -421,4 +422,10 @@ class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
         }
     }
 //< resolve-local
+
+    public Void visitAssignExpr(Expr.Assign expr) {
+        resolve(expr.value);
+        resolveLocalForAssign(expr, expr.name);
+        return null;
+    }
 }
