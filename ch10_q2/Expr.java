@@ -217,3 +217,19 @@ abstract class Expr {
     abstract <R> R accept(Visitor<R> visitor);
 }
 //< Appendix II expr
+
+static class Anom extends Expr {
+    Anom(List<Token> params, List<Stmt> body) {
+        this.params = params;
+        this.body = body;
+    }
+
+    @Override
+    <R> R accept(Visitor<R> visitor) {
+        return visitor.visitLambdaExpr(this);
+    }
+
+    final List<Token> params;
+    final List<Stmt> body;
+
+}
