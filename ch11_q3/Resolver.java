@@ -372,7 +372,7 @@ class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
     //< resolve-function
 //> begin-scope
     private void beginScope() {
-        scopes.push(new HashMap<String, Boolean>());
+        scopes.push(new HashMap<>());
     }
     //< begin-scope
 //> end-scope
