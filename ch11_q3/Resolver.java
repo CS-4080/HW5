@@ -411,8 +411,11 @@ class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
 //> resolve-local
     private void resolveLocal(Expr expr, Token name) {
         for (int i = scopes.size() - 1; i >= 0; i--) {
-            if (scopes.get(i).containsKey(name.lexeme)) {
+            Map<String, Local> scope = scopes.get(i);
+            Local local = scope.get(name.lexeme);
+            if (local != nll) {
                 interpreter.resolve(expr, scopes.size() - 1 - i);
+                local.used = true;
                 return;
             }
         }
