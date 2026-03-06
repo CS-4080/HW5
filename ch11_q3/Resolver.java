@@ -377,7 +377,14 @@ class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
     //< begin-scope
 //> end-scope
     private void endScope() {
-        scopes.pop();
+
+        Map<String, Local> scope = scopes.pop();
+
+        for(Local local : scope.values()) {
+            if(local.defined && !local.used) {
+                Lox.error(local.name, "Local variable " + local.name.lexeme + " is never used");
+            }
+        }
     }
     //< end-scope
 //> declare
